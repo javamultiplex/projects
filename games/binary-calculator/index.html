@@ -1,0 +1,158 @@
+<!-- Enter your HTML code here -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Binary Calculator</title>
+		<style>
+		#res
+		{
+		background-color:lightgray;
+		border:solid;
+		width:81%;
+		height:48px;
+		font-size:20px;
+		}
+		#btns
+		{
+		width:90%;
+		}
+		#btns>.common
+		{
+		width:22%;
+		height:36px;
+		font-size:18px;
+		}
+		.input
+		{
+		background-color:lightgreen;
+		color:brown;
+		}
+		.clearandEqual
+		{
+		background-color:darkgreen;
+		color:white;
+		}
+		.opretor
+		{
+		background-color:black;
+		color:red;
+		}
+		
+		</style>
+    </head>
+    <body>
+
+	<div id="res">
+	</div>
+	<div id="btns">
+	<button id="btn0" class="common input" onclick="append(this)">0</button>
+	<button id="btn1" class="common input" onclick="append(this)">1</button>
+	<button id="btnClr" class="common clearandEqual" onclick="clea()">C</button>
+	<button id="btnEql" class="common clearandEqual" onclick="equal()">=</button>
+	<button id="btnSum" class="common opretor" onclick="append(this)">+</button>
+	<button id="btnSub" class="common opretor" onclick="append(this)">-</button>
+	<button id="btnMul" class="common opretor" onclick="append(this)">*</button>
+	<button id="btnDiv" class="common opretor" onclick="append(this)">/</button>
+	</div>
+	
+	<script>
+	
+	var test="";
+	function clea()
+	{
+	document.getElementById("res").innerHTML="";
+	test="";
+	}
+	
+	function append(e)
+	{
+	test+=e.innerHTML;
+	document.getElementById("res").innerHTML=test;
+	}
+	
+	
+	function equal()
+	{
+	var first="";
+	var second="";
+	
+	var i=0;
+	var op;
+	for(var j=0;j<test.length;j++)
+	{
+		if(test.charAt(j)=='+')
+			op='+';
+		if(test.charAt(j)=='-')
+			op='-';
+		if(test.charAt(j)=='*')
+			op='*';
+		if(test.charAt(j)=='/')
+			op='/';
+	}
+	
+	while(test.charAt(i)!=op)
+	{
+			first+=test.charAt(i);
+			i++;
+	}
+	
+	for(var j=i+1;j<test.length;j++)
+	{
+		second+=test.charAt(j);
+	}
+	
+	var firstD=getDecimal(first);
+	var secondD=getDecimal(second);
+	var result;
+	var finalResult;
+	if(op=='+')
+		{
+		result=firstD+secondD;
+		
+		}
+		
+	if(op=='-')
+		{
+		result=firstD-secondD;
+		}
+	if(op=='*')
+		{
+		result=firstD*secondD;
+		}
+	if(op=='/')
+		{
+		result=firstD/secondD;
+		}
+	finalResult=result.toString(2);
+	document.getElementById("res").innerHTML=finalResult;
+	test=finalResult;
+	
+}
+
+function getDecimal(test)
+{
+var length=test.length;
+var sum=0;
+var temp=length;
+for(var i=0;i<length;i++)
+{
+sum+=parseInt(test.charAt(i))*pow(--temp);
+}
+return sum;
+}
+	
+function pow(x)
+{
+var mul=1;
+for(var i=1;i<=x;i++)
+{
+mul*=2;
+}
+return mul;
+}
+	</script>
+	
+	
+    </body>
+</html>
